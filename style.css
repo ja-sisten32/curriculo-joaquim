@@ -1,0 +1,367 @@
+/* ─────────────────────────────────────────
+   Joaquim de Almeida — Portfolio
+   Estilo: Minimalismo elegante
+   Paleta: Off-white + preto profundo + dourado sutil
+   
+   Feito pelo Cloude AI enquanto eu testava a ferramenta.
+   Esta ferramenta foi usada a fins de estudo e aprendizado mais profundo das funções do CSS.
+───────────────────────────────────────── */
+
+/*
+  Este arquivo contém todas as regras de estilo da página.
+  Comentários detalhados explicam o propósito de cada grupo de regras.
+*/
+
+/* Importa as fontes usadas no site (serifada para títulos, monoespaçada para nav e detalhes) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
+
+/*
+  Variáveis CSS (custom properties) para manter a paleta e tipografia consistentes.
+  Mudando um valor aqui afeta todo o layout (cores, fontes, espaços, etc.).
+*/
+:root {
+  /* Paleta */
+  --bg:        #f7f5f0;  /* fundo geral */
+  --surface:   #ffffff;  /* superfícies claras (cards, containers) */
+  --text:      #1a1a18;  /* cor principal do texto */
+  --muted:     #7a7770;  /* texto secundário / descrição */
+  --accent:    #b89c6e;  /* cor de destaque / links */
+  --border:    #e0ddd7;  /* bordas sutis */
+  --header-h:  68px;     /* altura de header fixo */
+
+  /* Tipografia */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;  /* usado em títulos e textos de introdução */
+  --font-mono:  'DM Mono', 'Courier New', monospace;  /* usado em navegação e pequenos detalhes */
+}
+
+/* ── Reset básico ── */
+/*
+  Garante que todos os elementos usem box-sizing border-box e elimina
+  margens e preenchimentos padrão do navegador. Isso facilita o controle
+do layout.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Smooth scrolling para ancoras internas (#id) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos base do body */
+/*
+  Configura a tipografia geral, a cor de fundo e organiza o layout
+  em uma coluna flexível para permitir rodapé no final.
+*/
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header / Nav fixo ── */
+/*
+  Header fixo no topo com transparência leve e borda inferior para
+  indicar separação do conteúdo. Usa backdrop-filter para um efeito de blur.
+*/
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: rgba(247, 245, 240, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+}
+
+/* Título do site/portfolio (primeiro nível) */
+header h1#jc {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+/* Subtítulo escondido: usado apenas quando queremos manter o HTML semântico,
+   mas sem exibir o subtítulo na UI. */
+header h5 {
+  display: none; /* subtítulo escondido — nome já está no h1 */
+}
+
+/* ── Menu de navegação ── */
+/*
+  A barra de navegação é construída com uma lista não ordenada.
+  Cada link tem efeito hover com underline animado para reforçar a interatividade.
+*/
+nav ul.menu {
+  list-style: none;
+  display: flex;
+  gap: 2.4rem;
+}
+
+/* Links do menu (tamanho pequeno + monospace para contraste) */
+nav ul.menu li a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.25s;
+  position: relative; /* necessário para pseudo-elemento ::after */
+}
+
+/* Linha de destaque sob o link com animação de escala */
+nav ul.menu li a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+/* Hover states: cor do texto e animação da linha */
+nav ul.menu li a:hover {
+  color: var(--text);
+}
+nav ul.menu li a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Main ── */
+/*
+  Área principal de conteúdo. Ajusta a margem superior para compensar o header
+  fixo e centraliza o conteúdo com largura máxima.
+*/
+main {
+  flex: 1;
+  margin-top: var(--header-h);
+  padding: 5rem 5vw 4rem;
+  max-width: 760px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Headings ── */
+/*
+  Títulos dentro do main usam a fonte serifada para dar peso visual, e o h2
+  recebe uma borda inferior suave para destacar seções.
+*/
+main h2 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  margin-top: 3rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Subtítulos menores em estilo monoespaçado, para reforçar hierarquia */
+main h3 {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+
+/* ── Parágrafos ── */
+/*
+  Texto do corpo com cor mais suave para facilitar leitura em blocos longos.
+  O <strong> ganha contraste para destacar palavras importantes.
+*/
+main p {
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+main p strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Listas ── */
+/*
+  Remove marcadores padrão e substitui por um traço customizado para manter o visual minimal.
+*/
+main ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+main ul li {
+  color: var(--muted);
+  padding: 0.3rem 0;
+  padding-left: 1.2rem;
+  position: relative; /* para posicionar o pseudo-elemento de marcador */
+}
+
+main ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+/* ── Foto de perfil ── */
+/*
+  Centraliza a imagem de perfil e aplica borda arredondada, além de um efeito de
+  grayscale que revela cor ao passar o mouse.
+*/
+.profile {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.profile img {
+  width: 140px !important;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  filter: grayscale(20%);
+  transition: filter 0.4s ease;
+}
+
+.profile img:hover {
+  filter: grayscale(0%);
+}
+
+/* ── Intro (index) ── */
+/*
+  Seção de introdução centralizada com largura máxima para melhor leitura.
+*/
+.intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Caso <h3> dentro de .intro use flex (p.ex. em outra estrutura), garante centralização */
+.intro h3 {
+  justify-content: center;
+}
+
+.intro p {
+  margin-bottom: 1rem;
+}
+
+/* ── Tabela (currículo) ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+thead tr {
+  border-bottom: 1px solid var(--text);
+}
+
+thead th {
+  text-align: left;
+  padding: 0.55rem 0.8rem 0.55rem 0;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+tbody tr:hover { background: rgba(184, 156, 110, 0.05); }
+
+tbody td {
+  padding: 0.65rem 0.8rem 0.65rem 0;
+  color: var(--muted);
+  vertical-align: top;
+}
+
+tbody td:first-child { color: var(--text); font-weight: 400; }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.6rem 5vw;
+  text-align: center;
+}
+
+footer .creditos p,
+footer .creditos data {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+footer .creditos a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+footer .creditos a:hover { opacity: 0.7; }
+
+/* ── Animação de entrada ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+main > * {
+  animation: fadeUp 0.55s ease both;
+}
+
+main > *:nth-child(1) { animation-delay: 0.05s; }
+main > *:nth-child(2) { animation-delay: 0.12s; }
+main > *:nth-child(3) { animation-delay: 0.19s; }
+main > *:nth-child(4) { animation-delay: 0.26s; }
+main > *:nth-child(5) { animation-delay: 0.33s; }
+
+/* ── Responsivo ── */
+@media (max-width: 600px) {
+  header { padding: 0 1.2rem; }
+  header h1#jc { font-size: 1.1rem; }
+  nav ul.menu { gap: 1.4rem; }
+  nav ul.menu li a { font-size: 0.65rem; }
+
+  main { padding: 4rem 1.4rem 3rem; }
+
+  table { font-size: 0.72rem; }
+  thead th, tbody td { padding-right: 0.4rem; }
+}
