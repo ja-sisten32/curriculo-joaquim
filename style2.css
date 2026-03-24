@@ -10,7 +10,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     background-color: #1a1a1a;
     color: #fff5e2;
-    text-align: center;
+    /* text-align: center; */
 }
 
 header {
@@ -29,16 +29,13 @@ h5 {
     justify-content: center;
     gap: 40px;
     margin-top: 30px;
+    flex-direction: row;
 }
 
 main {
     max-width: 600px;
     margin: 70px auto;
     padding: 20px;
-}
-
-.profile {
-    margin-bottom: 50px;
 }
 
 h3 {
@@ -65,4 +62,22 @@ tbody {
     margin: 30px;
     justify-items: center;
     grid-column: auto;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home{
+    text-align: center;
+}
+
+img {
+    object-fit: cover;
+    margin-bottom: 50px;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
 }
